@@ -30,3 +30,17 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+terraform.tfstate*
+crash.log
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+!*.tfvars.example
+override.tf
+override.tf.json
+_override.tf
+_override.tf.json
