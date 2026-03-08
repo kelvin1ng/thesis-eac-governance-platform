@@ -1,6 +1,6 @@
 # yamllint disable-file
 # CHAPTER3_REFERENCE.md §3.2.2: Traceability labels; §3.2.2 firewall networking (no privileged, capabilities)
-# Note: Helm template directives ({{ ... }}) are valid but can trigger false-positive YAML flow-map errors.
+# Note: Helm template directives are valid here and may trigger YAML lint false positives.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
