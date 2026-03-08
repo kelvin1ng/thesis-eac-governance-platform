@@ -29,3 +29,7 @@ spec:
   clusterResourceWhitelist:
     - group: ""
       kind: Namespace
+    - group: "templates.gatekeeper.sh"
+      kind: "ConstraintTemplate"
+    - group: "constraints.gatekeeper.sh"
+      kind: "*"
