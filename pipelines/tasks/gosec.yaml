@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=ignore
+# CHAPTER3_REFERENCE.md §3.2.3 Layer 3, Table 1: gosec — Go static analysis (Execution Plane Verification)
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: gosec
+  annotations:
+    description: "Run gosec on Go source (firewall app)"
+spec:
+  description: Runs gosec for Layer 3 compliance verification.
+  params:
+    - name: PACKAGE_PATH
+      description: Path to Go package relative to app root (e.g. ./...)
+      default: "./..."
+    - name: APP_PATH
+      description: Path to app (Go module) relative to source
+      default: "apps/firewall"
+  workspaces:
+    - name: source
+      description: Git-cloned source (repo root)
+  steps:
+    - name: gosec
+      image: securego/gosec:2.19.0
+      workingDir: $(workspaces.source.path)/$(params.APP_PATH)
+      args:
+        - "-fmt=json"
+        - "-out=gosec-report.json"
+        - "$(params.PACKAGE_PATH)"
+      # Pipeline fails if gosec finds issues (Layer 3 gate)

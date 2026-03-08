@@ -1,0 +1,18 @@
+# CHAPTER3_REFERENCE.md §3.0: Firewall service on port 8080
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "firewall.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "firewall.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "firewall.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

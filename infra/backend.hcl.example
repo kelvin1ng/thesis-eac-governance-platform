@@ -1,0 +1,11 @@
+# Backend config for Terraform S3 state + native S3 locking (use_lockfile)
+# CHAPTER3_REFERENCE.md §3.2.1 Layer 1, Table 1
+# Copy to backend.hcl, fill values, run: terraform init -backend-config=backend.hcl
+# Create S3 bucket before first init (see README.md). use_lockfile replaces deprecated dynamodb_table (Terraform 1.10+).
+
+bucket       = "thesis-eac-tfstate"
+key          = "infra/terraform.tfstate"
+region       = "us-east-1"
+use_lockfile = true
+profile      = "thesis"
+encrypt      = true

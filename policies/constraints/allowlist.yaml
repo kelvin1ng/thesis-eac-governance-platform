@@ -1,0 +1,27 @@
+# CHAPTER3_REFERENCE.md §3.2.2 Layer 2: Image registry allowlist constraint
+# Table 1: Gatekeeper. Restricts images to ECR and trusted registries.
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRegistries
+metadata:
+  name: allowed-registries
+  annotations:
+    description: "3.2.2 — images must be from allowed registries"
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+      - apiGroups: ["apps"]
+        kinds: ["Deployment", "ReplicaSet"]
+    excludedNamespaces:
+      - monitoring
+      - kube-system
+      - gatekeeper-system
+      - tekton-pipelines
+  parameters:
+    registries:
+      - "641133458487.dkr.ecr.us-east-1.amazonaws.com"
+      - "602401143452.dkr.ecr."
+      - "docker.io"
+      - "ghcr.io"
+      # For Kind: add "localhost:5000" if using local registry

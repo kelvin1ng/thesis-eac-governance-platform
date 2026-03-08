@@ -1,0 +1,76 @@
+# CHAPTER3_REFERENCE.md §3.2.2 Layer 2, Table 3: Image signature verification (digest + cosign)
+# Mandates image signature verification; use digest-only refs (immutability) [43], [52].
+# Pipeline signs with cosign; admission enforces digest format (sha256:) as content-addressable integrity.
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredimagedigest
+  annotations:
+    description: "3.2.2 Layer 2 — images must use digest (sha256:) for integrity; cosign verification in pipeline"
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredImageDigest
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            excludedNamespaces:
+              type: array
+              items:
+                type: string
+              description: "Namespaces to exclude from digest requirement (e.g. kube-system)"
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8srequiredimagedigest
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          not excluded_namespace
+          image := input.review.object.spec.containers[_].image
+          not has_digest(image)
+          msg := sprintf("Container image %v must use digest (sha256:...), not tag", [image])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          not excluded_namespace
+          image := input.review.object.spec.initContainers[_].image
+          not has_digest(image)
+          msg := sprintf("Init container image %v must use digest (sha256:...), not tag", [image])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Deployment"
+          not excluded_namespace
+          image := input.review.object.spec.template.spec.containers[_].image
+          not has_digest(image)
+          msg := sprintf("Container image %v must use digest (sha256:...), not tag", [image])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Deployment"
+          not excluded_namespace
+          image := input.review.object.spec.template.spec.initContainers[_].image
+          not has_digest(image)
+          msg := sprintf("Init container image %v must use digest (sha256:...), not tag", [image])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "ReplicaSet"
+          not excluded_namespace
+          image := input.review.object.spec.template.spec.containers[_].image
+          not has_digest(image)
+          msg := sprintf("Container image %v must use digest (sha256:...), not tag", [image])
+        }
+
+        excluded_namespace {
+          ns := input.review.object.metadata.namespace
+          input.parameters.excludedNamespaces[_] == ns
+        }
+
+        has_digest(image) {
+          contains(image, "sha256:")
+        }

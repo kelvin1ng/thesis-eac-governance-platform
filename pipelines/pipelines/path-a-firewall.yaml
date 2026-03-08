@@ -1,0 +1,100 @@
+# CHAPTER3_REFERENCE.md Figure 2 Path A: gosec → Kaniko → Trivy/SBOM → Conftest → cosign
+# §3.2.3 Layer 3, Table 1: Tekton Execution Plane; Chains for attestation (Evidence).
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: path-a-firewall
+  annotations:
+    description: "Path A — firewall app: verify, build, scan, policy test, sign"
+spec:
+  description: |
+    Path A (Figure 2): gosec → Kaniko build → Trivy + CycloneDX SBOM → Conftest → cosign sign.
+    Tekton Chains will attest the build (in-toto/SLSA) when installed.
+  params:
+    - name: REPO_URL
+      type: string
+      description: Git repository URL
+    - name: REVISION
+      type: string
+      default: main
+      description: Branch or commit
+    - name: IMAGE
+      type: string
+      description: Full image reference (registry/repo:tag) for build and sign
+  workspaces:
+    - name: source
+      description: Cloned source and build outputs
+    - name: dockerconfig
+      description: Optional registry auth for Kaniko
+      optional: true
+    - name: sbom-output
+      description: Trivy SBOM and reports (Evidence)
+  tasks:
+    - name: clone
+      taskRef:
+        name: git-clone
+      params:
+        - name: URL
+          value: $(params.REPO_URL)
+        - name: REVISION
+          value: $(params.REVISION)
+      workspaces:
+        - name: output
+          workspace: source
+    - name: gosec
+      runAfter: [clone]
+      taskRef:
+        name: gosec
+      params:
+        - name: APP_PATH
+          value: "apps/firewall"
+        - name: PACKAGE_PATH
+          value: "./..."
+      workspaces:
+        - name: source
+          workspace: source
+    - name: kaniko-build
+      runAfter: [gosec]
+      taskRef:
+        name: kaniko-build
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE)
+        - name: DOCKERFILE
+          value: "Dockerfile"
+        - name: CONTEXT
+          value: "apps/firewall"
+      workspaces:
+        - name: source
+          workspace: source
+        - name: dockerconfig
+          workspace: dockerconfig
+    - name: trivy-sbom
+      runAfter: [kaniko-build]
+      taskRef:
+        name: trivy-sbom
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE)
+      workspaces:
+        - name: sbom-output
+          workspace: sbom-output
+    - name: conftest
+      runAfter: [trivy-sbom]
+      taskRef:
+        name: conftest
+      workspaces:
+        - name: source
+          workspace: source
+    - name: cosign-sign
+      runAfter: [conftest]
+      taskRef:
+        name: cosign-sign
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE)
+      workspaces: []
+  results:
+    - name: IMAGE_DIGEST
+      description: Digest of built image (for Argo CD digest-only deploy)
+      value: $(tasks.kaniko-build.results.IMAGE_DIGEST)

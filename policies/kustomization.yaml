@@ -1,0 +1,13 @@
+# CHAPTER3_REFERENCE.md §3.2.2 Layer 2: Apply Gatekeeper policies
+# Order: templates first (CRDs), then constraints. Use: kubectl apply -k policies/
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - templates/image-registry-allowlist.yaml
+  - templates/image-signature-cosign.yaml
+  - templates/required-labels.yaml
+  - templates/firewall-networking.yaml
+  - constraints/allowlist.yaml
+  - constraints/cosign.yaml
+  - constraints/labels.yaml
+  - constraints/firewall-networking.yaml

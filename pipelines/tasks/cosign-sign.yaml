@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=ignore
+# CHAPTER3_REFERENCE.md Table 1: cosign — sign image (Evidence Plane); §3.1 Traceability
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: cosign-sign
+  annotations:
+    description: "Sign container image with cosign (Sigstore)"
+spec:
+  description: Signs the built image for admission-time verification (Layer 2).
+  params:
+    - name: IMAGE
+      description: Image reference to sign (digest recommended)
+    - name: COSIGN_EXPERIMENTAL
+      description: Set to "true" for keyless (Sigstore keyless signing)
+      default: "true"
+  workspaces:
+    - name: cosign-key
+      description: Optional workspace with cosign private key
+      optional: true
+  steps:
+    - name: sign
+      image: gcr.io/projectsigstore/cosign:v2.2.4
+      env:
+        - name: COSIGN_EXPERIMENTAL
+          value: "$(params.COSIGN_EXPERIMENTAL)"
+      args:
+        - "sign"
+        - "--yes"
+        - "$(params.IMAGE)"
+      # Keyless: cosign sign will use Sigstore OIDC; pipeline needs identity (e.g. Tekton OIDC)

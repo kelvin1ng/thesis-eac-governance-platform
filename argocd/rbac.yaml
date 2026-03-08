@@ -1,0 +1,17 @@
+# CHAPTER3_REFERENCE.md §3.2.4 Layer 4, Table 3: Argo CD RBAC
+# Restrict who can change Applications; single-writer principle; drift control [49], [53].
+# Merge these keys into argocd-rbac-cm or apply in greenfield (see README).
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+  # Default: read-only; only explicit grants get write (Table 3)
+  policy.default: role:readonly
+  # Grant full access on thesis project to role:thesis-admin (bind users/groups to this role in IdP)
+  policy.csv: |
+    p, role:thesis-admin, thesis, applications/*, *
+    p, role:thesis-admin, thesis, clusters, get
+    g, thesis-admin, role:thesis-admin

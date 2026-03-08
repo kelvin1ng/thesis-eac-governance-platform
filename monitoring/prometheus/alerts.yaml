@@ -1,0 +1,61 @@
+# CHAPTER3_REFERENCE.md §3.1 Observability, Table 1 Evidence Plane, Table 3 detective controls
+# Alerts: drift (Argo CD OutOfSync), policy denials (Gatekeeper), sync failures [25], [22].
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: thesis-eac-alerts
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: thesis-eac-alerts
+    prometheus: kube-prometheus-stack
+spec:
+  groups:
+    - name: argocd-drift
+      interval: 30s
+      rules:
+        - alert: ArgoCDAppOutOfSync
+          expr: argocd_app_info{sync_status="OutOfSync"} == 1
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Argo CD application {{ $labels.name }} is OutOfSync (drift)"
+            description: "Application {{ $labels.name }} in namespace {{ $labels.namespace }} has drifted from Git. Table 3 detective control."
+        - alert: ArgoCDAppSyncFailed
+          expr: argocd_app_sync_total{phase="Failed"} > 0 or argocd_app_info{health_status="Degraded"} == 1
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Argo CD sync failed or app degraded"
+            description: "Drift or sync failure detected; self-heal may not have succeeded."
+    - name: gatekeeper-policy
+      interval: 30s
+      rules:
+        - alert: GatekeeperConstraintViolations
+          expr: increase(gatekeeper_constraint_violations_total[5m]) > 0
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Gatekeeper constraint violations (policy denial)"
+            description: "Constraint {{ $labels.constraint }} has violations. Table 3 policy bypass detective [54]."
+        - alert: GatekeeperAuditRunFailure
+          expr: gatekeeper_audit_last_run_time == 0 or (time() - gatekeeper_audit_last_run_time) > 300
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Gatekeeper audit has not run recently"
+            description: "Audit may be stuck; check gatekeeper-controller-manager."
+    - name: thesis-firewall
+      interval: 30s
+      rules:
+        - alert: FirewallPodNotReady
+          expr: count(kube_pod_status_ready{namespace="firewall", condition="true"} == 1) == 0
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "No ready pods in firewall namespace"
+            description: "Firewall workload may be down; check firewall namespace."

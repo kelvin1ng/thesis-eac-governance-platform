@@ -1,0 +1,28 @@
+# CHAPTER3_REFERENCE.md §3.2.2 Layer 2, Table 3: Image digest requirement (cosign/signature verification)
+# Enforces digest-only refs; cosign signs in pipeline; admission validates digest format.
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredImageDigest
+metadata:
+  name: required-image-digest
+  annotations:
+    description: "3.2.2 — images must use digest (sha256:) for integrity"
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+      - apiGroups: ["apps"]
+        kinds: ["Deployment", "ReplicaSet"]
+    excludedNamespaces:
+      - monitoring
+      - kube-system
+      - gatekeeper-system
+      - tekton-pipelines
+      - argocd
+  parameters:
+    excludedNamespaces:
+      - monitoring
+      - kube-system
+      - gatekeeper-system
+      - tekton-pipelines
+      - argocd

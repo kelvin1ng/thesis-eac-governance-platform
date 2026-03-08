@@ -1,0 +1,8 @@
+# CHAPTER3_REFERENCE.md Table 1 Kustomize: dev overlay
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: firewall
+resources:
+  - ../../base
+commonLabels:
+  environment: dev

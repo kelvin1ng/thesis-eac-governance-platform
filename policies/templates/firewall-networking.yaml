@@ -1,0 +1,97 @@
+# CHAPTER3_REFERENCE.md §3.2.2 Layer 2: Firewall networking constraints [44]
+# Policy category 3: privileged mode restrictions, host networking limits,
+# kernel capabilities limited to packet inspection (NET_RAW, NET_ADMIN).
+# Prevents lateral movement and container escape.
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8sfirewallnetworking
+  annotations:
+    description: "3.2.2 Layer 2 — firewall pod: no privileged, no hostNetwork, limited capabilities"
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sFirewallNetworking
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            allowedCapabilities:
+              type: array
+              items:
+                type: string
+              description: "Capabilities allowed for packet inspection (NET_RAW, NET_ADMIN)"
+            firewallNamespace:
+              type: string
+              description: "Namespace where firewall workloads run (stricter rules)"
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sfirewallnetworking
+
+        allowed_caps := {cap | cap := input.parameters.allowedCapabilities[_]}
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          input.review.object.spec.securityContext.privileged == true
+          msg := "Privileged mode is not allowed for firewall workloads"
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          input.review.object.spec.containers[_].securityContext.privileged == true
+          msg := "Container privileged mode is not allowed"
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          input.review.object.spec.hostNetwork == true
+          msg := "Host networking is not allowed for firewall workloads (use user-space)"
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          input.review.object.spec.hostPID == true
+          msg := "Host PID namespace is not allowed"
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          input.review.object.spec.hostIPC == true
+          msg := "Host IPC namespace is not allowed"
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          container := input.review.object.spec.containers[_]
+          cap := container.securityContext.capabilities.add[_]
+          not allowed_caps[cap]
+          msg := sprintf("Capability %v is not allowed; only %v permitted for packet inspection", [cap, input.parameters.allowedCapabilities])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Deployment"
+          input.review.object.spec.template.spec.securityContext.privileged == true
+          msg := "Privileged mode is not allowed"
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Deployment"
+          input.review.object.spec.template.spec.containers[_].securityContext.privileged == true
+          msg := "Container privileged mode is not allowed"
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Deployment"
+          input.review.object.spec.template.spec.hostNetwork == true
+          msg := "Host networking is not allowed for firewall workloads"
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Deployment"
+          container := input.review.object.spec.template.spec.containers[_]
+          cap := container.securityContext.capabilities.add[_]
+          not allowed_caps[cap]
+          msg := sprintf("Capability %v not allowed; only %v for packet inspection", [cap, input.parameters.allowedCapabilities])
+        }

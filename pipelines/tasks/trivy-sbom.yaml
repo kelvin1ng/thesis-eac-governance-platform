@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=ignore
+# CHAPTER3_REFERENCE.md §3.2.3 Layer 3, Table 1: Trivy — vulnerability scan + CycloneDX SBOM (Evidence)
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: trivy-sbom
+  annotations:
+    description: "Trivy image scan and CycloneDX SBOM generation"
+spec:
+  description: Scans image for vulnerabilities and generates SBOM (Traceability §3.1).
+  params:
+    - name: IMAGE
+      description: Image reference to scan (tag or digest)
+  workspaces:
+    - name: sbom-output
+      description: Where to write SBOM and scan reports
+  steps:
+    - name: trivy-scan
+      image: aquasec/trivy:0.49.0
+      args:
+        - "image"
+        - "--format=json"
+        - "--output=$(workspaces.sbom-output.path)/trivy-report.json"
+        - "--exit-code=0"
+        - "--severity=HIGH,CRITICAL"
+        - "$(params.IMAGE)"
+    - name: trivy-sbom
+      image: aquasec/trivy:0.49.0
+      args:
+        - "image"
+        - "--format=cyclonedx"
+        - "--output=$(workspaces.sbom-output.path)/sbom.cyclonedx.json"
+        - "$(params.IMAGE)"

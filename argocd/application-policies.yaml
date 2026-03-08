@@ -1,0 +1,25 @@
+# CHAPTER3_REFERENCE.md §3.2.4 Layer 4, Figure 3 Path B: Policy rollout (optional)
+# Deploys Gatekeeper constraints from Git; controlled rollout after CODEOWNERS review.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: policies
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: thesis
+  source:
+    repoURL: https://github.com/kelvin1ng/thesis-eac-governance-platform.git
+    path: policies
+    targetRevision: main
+    kustomize: {}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gatekeeper-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

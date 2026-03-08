@@ -1,0 +1,44 @@
+# CHAPTER3_REFERENCE.md §3.5 Path A, Table 3: Required status checks for PRs to main
+# Preventive: protected branches, mandatory PR review, status checks from gosec, Trivy, Conftest [51].
+# Path A (Figure 2): developer commits firewall code → these checks must pass before merge.
+name: PR Checks
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  gosec:
+    name: gosec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.21"
+      - name: Run gosec
+        run: |
+          go install github.com/securego/gosec/v2/cmd/gosec@latest
+          cd apps/firewall && gosec -no-fail -fmt=json -out=../../gosec-report.json ./... && gosec ./...
+  conftest-manifests:
+    name: conftest-manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Conftest
+        run: |
+          wget -qO- https://github.com/open-policy-agent/conftest/releases/latest/download/conftest_linux_amd64.tar.gz | tar -xz
+          chmod +x conftest && sudo mv conftest /usr/local/bin
+      - name: Conftest (manifests)
+        run: |
+          conftest test apps/firewall/kustomize/base/deployment.yaml apps/firewall/kustomize/base/service.yaml --policy policies/rego/
+  trivy-config:
+    name: trivy-config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trivy config scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "config"
+          scan-ref: "."
+          severity: "CRITICAL,HIGH"
+          exit-code: "1"

@@ -1,0 +1,3 @@
+# CHAPTER3_REFERENCE.md — ensure shell scripts parse correctly (LF)
+* text=auto
+*.sh text eol=lf

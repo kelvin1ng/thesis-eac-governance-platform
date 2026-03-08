@@ -1,0 +1,22 @@
+# CHAPTER3_REFERENCE.md §3.1 Observability, Table 1: Gatekeeper audit metrics (Evidence Plane)
+# ServiceMonitor so Prometheus scrapes Gatekeeper controller metrics [25], [34].
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: gatekeeper
+  namespace: gatekeeper-system
+  labels:
+    app.kubernetes.io/name: gatekeeper
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+      gatekeeper.sh/system: "yes"
+  namespaceSelector:
+    matchNames:
+      - gatekeeper-system
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics

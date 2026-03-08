@@ -1,0 +1,37 @@
+# CHAPTER3_REFERENCE.md §3.2.2: Traceability labels (owner, environment, compliance-scope)
+# Image: use digest in production (e.g. image.repository@sha256:...)
+replicaCount: 1
+image:
+  repository: 641133458487.dkr.ecr.us-east-1.amazonaws.com/thesis-eac/firewall
+  pullPolicy: IfNotPresent
+  tag: ""
+  digest: ""  # set to sha256:... for Gatekeeper cosign constraint (Layer 2)
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+serviceAccount: {}
+podAnnotations: {}
+podLabels: {}
+traceability:
+  owner: platform-team
+  environment: dev
+  complianceScope: eac-governance
+resources:
+  limits:
+    cpu: 100m
+    memory: 64Mi
+  requests:
+    cpu: 50m
+    memory: 32Mi
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+  initialDelaySeconds: 2
+  periodSeconds: 5

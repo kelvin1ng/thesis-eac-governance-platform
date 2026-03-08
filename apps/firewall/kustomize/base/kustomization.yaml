@@ -1,0 +1,9 @@
+# CHAPTER3_REFERENCE.md Table 1 Kustomize: base for firewall
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployment.yaml
+  - service.yaml
+commonLabels:
+  app.kubernetes.io/name: firewall
+  app.kubernetes.io/component: cnf

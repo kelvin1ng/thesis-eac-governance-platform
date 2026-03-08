@@ -1,0 +1,7 @@
+# CHAPTER3_REFERENCE.md §3.2.1 Layer 1: Terraform variables example
+# Copy to terraform.tfvars (gitignored) and adjust.
+
+aws_region     = "us-east-1"
+project_name   = "thesis-eac"
+environment    = "dev"
+compliance_scope = "eac-governance"

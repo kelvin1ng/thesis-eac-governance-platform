@@ -31,16 +31,24 @@ go.work.sum
 # .idea/
 # .vscode/
 
-# Terraform
+# Kind bootstrap temp
+.kind-config.yaml
+
+# Terraform (CHAPTER3 §3.2.1 Layer 1)
+infra/backend.hcl
 *.tfstate
 *.tfstate.*
 terraform.tfstate*
 crash.log
 .terraform/
-.terraform.lock.hcl
+# .terraform.lock.hcl — commit for reproducibility (CHAPTER3 traceability)
 *.tfvars
 !*.tfvars.example
 override.tf
 override.tf.json
 _override.tf
 _override.tf.json
+
+aws/
+awscliv2.zip
+.vscode/

@@ -1,0 +1,11 @@
+# CHAPTER3_REFERENCE.md §3.0, Table 1 Helm: virtual firewall CNF
+apiVersion: v2
+name: firewall
+description: Virtual firewall CNF (port 8080, configurable rules)
+type: application
+version: 0.1.0
+appVersion: "1"
+keywords:
+  - firewall
+  - cnf
+maintainers: []

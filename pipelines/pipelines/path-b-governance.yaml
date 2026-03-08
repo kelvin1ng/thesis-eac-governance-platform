@@ -1,0 +1,42 @@
+# CHAPTER3_REFERENCE.md Figure 3 Path B: Governance change — Conftest policy validation
+# §3.5 Path B: policy/pipeline/Terraform changes; CODEOWNERS review; Conftest validates policies.
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: path-b-governance
+  annotations:
+    description: "Path B — validate policies and pipeline definitions"
+spec:
+  description: |
+    Path B (Figure 3): Clone repo, run Conftest on policies and (optionally) on pipeline YAML.
+  params:
+    - name: REPO_URL
+      type: string
+    - name: REVISION
+      type: string
+      default: main
+  workspaces:
+    - name: source
+      description: Cloned repo
+  tasks:
+    - name: clone
+      taskRef:
+        name: git-clone
+      params:
+        - name: URL
+          value: $(params.REPO_URL)
+        - name: REVISION
+          value: $(params.REVISION)
+      workspaces:
+        - name: output
+          workspace: source
+    - name: conftest-policies
+      runAfter: [clone]
+      taskRef:
+        name: conftest
+      params:
+        - name: POLICY_PATH
+          value: "policies/rego"
+      workspaces:
+        - name: source
+          workspace: source

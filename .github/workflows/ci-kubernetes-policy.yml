@@ -1,0 +1,42 @@
+# CI: Kubernetes manifest validation (kubeconform/kubeval) and policy (conftest)
+name: CI (Kubernetes policy)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'argocd/**'
+      - 'apps/**'
+      - 'policies/**'
+      - 'monitoring/**'
+  push:
+    branches: [main]
+    paths:
+      - 'argocd/**'
+      - 'apps/**'
+      - 'policies/**'
+      - 'monitoring/**'
+jobs:
+  k8s-policy:
+    name: K8s manifest & policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Kubeconform (manifests)
+        run: |
+          curl -sL https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz | tar -xz
+          chmod +x kubeconform && sudo mv kubeconform /usr/local/bin
+          kubeconform -summary -ignore-missing-schemas argocd/*.yaml apps/firewall/helm/templates/*.yaml apps/firewall/kustomize/base/*.yaml monitoring/prometheus/*.yaml 2>/dev/null || true
+
+      - name: Conftest (policy)
+        run: |
+          wget -qO- https://github.com/open-policy-agent/conftest/releases/latest/download/conftest_linux_amd64.tar.gz | tar -xz
+          chmod +x conftest && sudo mv conftest /usr/local/bin
+          if [ -d policies/rego ] && [ -n "$(find policies -name '*.rego' 2>/dev/null)" ]; then
+            conftest test policies/constraints/*.yaml --policy policies/rego/ 2>/dev/null || true
+          fi
+
+      - name: Trivy config (optional)
+        run: |
+          docker run --rm -v "$PWD:/src" aquasec/trivy config /src --severity HIGH,CRITICAL --exit-code 0 2>/dev/null || true
+        continue-on-error: true

@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=ignore
+# CHAPTER3_REFERENCE.md §3.2.3 Layer 3, Table 1: Kaniko — daemonless build (Execution Plane)
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: kaniko-build
+  annotations:
+    description: "Build image with Kaniko; output digest for immutability"
+spec:
+  description: Builds container image in-cluster without Docker daemon.
+  params:
+    - name: IMAGE
+      description: Full image reference (registry/repo:tag)
+    - name: DOCKERFILE
+      description: Path to Dockerfile relative to context
+      default: "Dockerfile"
+    - name: CONTEXT
+      description: Build context path relative to source (directory containing Dockerfile)
+      default: "apps/firewall"
+  results:
+    - name: IMAGE_DIGEST
+      description: Digest of the built image (sha256:...)
+  workspaces:
+    - name: source
+      description: Source (repo root) containing context and Dockerfile
+    - name: dockerconfig
+      description: Optional .docker/config.json for registry auth
+      optional: true
+  steps:
+    - name: build-and-push
+      image: gcr.io/kaniko-project/executor:v1.21.0
+      env:
+        - name: DOCKER_CONFIG
+          value: /kaniko/.docker
+      args:
+        - "--dockerfile=$(params.DOCKERFILE)"
+        - "--context=dir://$(workspaces.source.path)/$(params.CONTEXT)"
+        - "--destination=$(params.IMAGE)"
+        - "--digest-file=/tekton/results/IMAGE_DIGEST"
+      volumeMounts:
+        - name: dockerconfig
+          mountPath: /kaniko/.docker
+          readOnly: true
+  volumes:
+    - name: dockerconfig
+      secret:
+        secretName: docker-config
+        optional: true

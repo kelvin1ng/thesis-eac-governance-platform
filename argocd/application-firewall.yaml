@@ -1,0 +1,38 @@
+# CHAPTER3_REFERENCE.md §3.2.4 Layer 4, Figure 2 Path A: Firewall Application
+# Single-writer: Argo CD reconciles from Git; use image digest in values (Layer 2 cosign).
+# Drift detection + self-heal + prune per Table 1.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: firewall
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: thesis
+  source:
+    repoURL: https://github.com/kelvin1ng/thesis-eac-governance-platform.git
+    path: apps/firewall/helm
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values.yaml
+      # Override image digest from pipeline output (set via values file or parameter)
+      # parameters:
+      #   - name: image.digest
+      #     value: "sha256:..."
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: firewall
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=ignore
+# CHAPTER3_REFERENCE.md §3.2.3 Layer 3, Table 1: Conftest — policy test on manifests (Execution Plane Verification)
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: conftest
+  annotations:
+    description: "Validate manifests against Rego policies (Layer 2)"
+spec:
+  description: Runs Conftest against deployment/manifest files using policies/rego.
+  params:
+    - name: POLICY_PATH
+      description: Path to Rego policy directory
+      default: "policies/rego"
+    - name: MANIFEST_PATHS
+      description: Space-separated manifest paths to test
+      default: "apps/firewall/helm/templates/deployment.yaml apps/firewall/kustomize/base/deployment.yaml"
+  workspaces:
+    - name: source
+      description: Repo root (manifests and policies)
+  steps:
+    - name: conftest-test
+      image: openpolicyagent/conftest:0.47.0
+      workingDir: $(workspaces.source.path)
+      args:
+        - "test"
+        - "--policy=$(params.POLICY_PATH)"
+        - "apps/firewall/helm/templates/deployment.yaml"
+        - "apps/firewall/kustomize/base/deployment.yaml"
+      # Conftest exits non-zero on policy failure (Layer 3 gate)

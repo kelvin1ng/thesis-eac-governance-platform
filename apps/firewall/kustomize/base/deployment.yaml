@@ -1,0 +1,48 @@
+# CHAPTER3_REFERENCE.md §3.2.2: Traceability labels; firewall networking (NET_RAW, NET_ADMIN only)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firewall
+  labels:
+    owner: platform-team
+    environment: dev
+    compliance-scope: eac-governance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: firewall
+  template:
+    metadata:
+      labels:
+        app: firewall
+        owner: platform-team
+        environment: dev
+        compliance-scope: eac-governance
+    spec:
+      containers:
+        - name: firewall
+          image: 641133458487.dkr.ecr.us-east-1.amazonaws.com/thesis-eac/firewall
+          ports:
+            - containerPort: 8080
+              name: http
+          resources:
+            limits: { cpu: 100m, memory: 64Mi }
+            requests: { cpu: 50m, memory: 32Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              add: [NET_RAW, NET_ADMIN]
+              drop: [ALL]
+          livenessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: { path: /ready, port: 8080 }
+            initialDelaySeconds: 2
+            periodSeconds: 5
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000

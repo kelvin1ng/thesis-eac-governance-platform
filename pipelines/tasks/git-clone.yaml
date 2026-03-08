@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=ignore
+# CHAPTER3_REFERENCE.md §3.2.4 Layer 4: Clone repo for pipeline (Figure 2 Path A)
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-clone
+  annotations:
+    description: "Clone repository for Path A pipeline"
+spec:
+  description: Clones the thesis-eac-governance-platform repo.
+  params:
+    - name: URL
+      description: Git repository URL
+    - name: REVISION
+      description: Branch, tag, or commit to clone
+      default: "main"
+  workspaces:
+    - name: output
+      description: Workspace where repo is cloned
+  steps:
+    - name: clone
+      image: alpine/git:2.43
+      workingDir: $(workspaces.output.path)
+      script: |
+        #!/bin/sh
+        set -e
+        git clone --depth=1 --single-branch -b "$(params.REVISION)" "$(params.URL)" .
+        git rev-parse HEAD > commit-sha

@@ -1,0 +1,20 @@
+# CHAPTER3_REFERENCE.md §3.1 Observability, Table 1: Gatekeeper metrics (Evidence Plane)
+# Alternative to ServiceMonitor if Service has no named metrics port; align with kube-prometheus-stack.
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: gatekeeper-controller-manager
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  namespaceSelector:
+    matchNames:
+      - gatekeeper-system
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  podMetricsEndpoints:
+    - port: metrics
+      path: /metrics
+      interval: 30s

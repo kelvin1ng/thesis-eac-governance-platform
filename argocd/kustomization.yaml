@@ -1,0 +1,9 @@
+# CHAPTER3_REFERENCE.md §3.2.4 Layer 4: Apply Argo CD project, apps, RBAC
+# Order: project first, then applications; RBAC ConfigMap (merge with existing if needed).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - project-thesis.yaml
+  - application-firewall.yaml
+  - application-policies.yaml
+  - rbac.yaml

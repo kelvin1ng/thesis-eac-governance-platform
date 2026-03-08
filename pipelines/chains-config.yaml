@@ -1,0 +1,24 @@
+# CHAPTER3_REFERENCE.md §3.1 Traceability, Table 1: Tekton Chains — in-toto/SLSA attestations
+# Apply to tekton-chains namespace; Chains observes TaskRuns/PipelineRuns and signs attestations.
+# Ref: https://tekton.dev/docs/chains/config/
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chains-config
+  namespace: tekton-chains
+  annotations:
+    description: "Tekton Chains config for signed provenance (Evidence Plane)"
+data:
+  # Signing: use keyless (Sigstore) or stored key
+  signers.x509.signer: "kms"
+  # Or for keyless: signers.x509.signer: "" and transparency URL
+  # transparency.enabled: "true"
+  # Store attestations in OCI registry alongside image
+  storage.oci.repository: ""  # Set to same registry as image for in-toto storage
+  # Taskrun format: in-toto provenance (SLSA)
+  artifact.signer: "x509"
+  # Format for build provenance
+  format: "in-toto"
+---
+# Example: disable in-toto format if only SLSA needed (Chains supports both)
+# Chains by default generates in-toto attestations and SLSA provenance.

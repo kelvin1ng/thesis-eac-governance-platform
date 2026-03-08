@@ -1,0 +1,10 @@
+# CHAPTER3_REFERENCE.md §3.5 Path B, Table 3: Unauthorized pipeline change prevention [50]
+# Policies, pipelines, and workflow changes require @security-owners / @thesis-platform-owners.
+
+*                           @thesis-platform-owners
+/policies/                  @thesis-platform-owners @security-owners
+/pipelines/                 @thesis-platform-owners @security-owners
+/infra/                     @thesis-platform-owners
+/argocd/                    @thesis-platform-owners
+.github/workflows/          @thesis-platform-owners @security-owners
+.github/CODEOWNERS          @thesis-platform-owners @security-owners

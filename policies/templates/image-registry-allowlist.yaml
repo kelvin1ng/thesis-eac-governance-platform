@@ -1,0 +1,67 @@
+# CHAPTER3_REFERENCE.md §3.2.2 Layer 2: Image registry allowlist
+# Table 1: Gatekeeper — Control Plane. Ensures firewall container from trusted source [43].
+# Policy category 1: enforce image registry allowlist.
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8sallowedregistries
+  annotations:
+    description: "3.2.2 Layer 2 — images must originate from allowlisted registries"
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sAllowedRegistries
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            registries:
+              type: array
+              items:
+                type: string
+              description: "Allowed registry prefixes (e.g., 641133458487.dkr.ecr.us-east-1.amazonaws.com)"
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sallowedregistries
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          image := input.review.object.spec.containers[_].image
+          not allowed_registry(image)
+          msg := sprintf("Image %v is not from an allowed registry", [image])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Pod"
+          image := input.review.object.spec.initContainers[_].image
+          not allowed_registry(image)
+          msg := sprintf("Init container image %v is not from an allowed registry", [image])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Deployment"
+          image := input.review.object.spec.template.spec.containers[_].image
+          not allowed_registry(image)
+          msg := sprintf("Image %v is not from an allowed registry", [image])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "Deployment"
+          image := input.review.object.spec.template.spec.initContainers[_].image
+          not allowed_registry(image)
+          msg := sprintf("Init container image %v is not from an allowed registry", [image])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.kind == "ReplicaSet"
+          image := input.review.object.spec.template.spec.containers[_].image
+          not allowed_registry(image)
+          msg := sprintf("Image %v is not from an allowed registry", [image])
+        }
+
+        allowed_registry(image) {
+          registry := input.parameters.registries[_]
+          startswith(image, registry)
+        }

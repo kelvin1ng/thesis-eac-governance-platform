@@ -1,0 +1,31 @@
+# CHAPTER3_REFERENCE.md §3.2.4 Layer 4, §3.3 Table 2, Table 3: Argo CD Project
+# Multi-tenant isolation: scope allowed repos and target clusters (single-writer, drift control).
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: thesis
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: argocd-applicationset
+spec:
+  description: "Thesis EaC governance platform — firewall and policies (Layer 4 Control Plane)"
+  # Allowed source repos (Table 3: restrict to authoritative Git repo)
+  sourceRepos:
+    - "https://github.com/thesis-eac-governance-platform/*"
+    - "https://github.com/kelvin1ng/thesis-eac-governance-platform*"
+    - "git@github.com:thesis-eac-governance-platform/*"
+    - "https://*.github.com/*/thesis-eac-governance-platform*"
+  # Allowed destinations (cluster + namespace) — single-writer boundary [3.2.4]
+  destinations:
+    - namespace: firewall
+      server: https://kubernetes.default.svc
+    - namespace: default
+      server: https://kubernetes.default.svc
+    - namespace: gatekeeper-system
+      server: https://kubernetes.default.svc
+  # Allow Namespace creation so Application can deploy to firewall ns
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace

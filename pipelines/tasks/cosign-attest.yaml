@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=ignore
+# CHAPTER3_REFERENCE.md Table 1: cosign attestation (optional — Chains also produces attestations)
+# Attach custom attestation (e.g. build type) to image; Tekton Chains handles SLSA/in-toto by default.
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: cosign-attest
+  annotations:
+    description: "Optional: attach attestation to image (Chains does SLSA)"
+spec:
+  description: Generates and attaches attestation; use with or after cosign-sign.
+  params:
+    - name: IMAGE
+      description: Image reference (digest recommended)
+    - name: PREDICATE_TYPE
+      default: "custom"
+  workspaces:
+    - name: predicate
+      description: Optional workspace with predicate file
+      optional: true
+  steps:
+    - name: attest
+      image: gcr.io/projectsigstore/cosign:v2.2.4
+      args:
+        - "attest"
+        - "--yes"
+        - "--type=slsaprovenance"
+        - "--predicate=/dev/null"
+        - "$(params.IMAGE)"
+      # Simplified; production would use Tekton Chains for provenance

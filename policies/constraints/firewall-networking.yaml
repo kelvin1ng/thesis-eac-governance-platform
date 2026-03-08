@@ -1,0 +1,26 @@
+# CHAPTER3_REFERENCE.md §3.2.2 Layer 2: Firewall networking constraint [44]
+# Privileged mode restrictions, host networking limits, capabilities for packet inspection only.
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sFirewallNetworking
+metadata:
+  name: firewall-networking
+  annotations:
+    description: "3.2.2 — no privileged, no hostNet, limited capabilities"
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+      - apiGroups: ["apps"]
+        kinds: ["Deployment", "ReplicaSet"]
+    namespaces:
+      - firewall
+      - default
+    excludedNamespaces:
+      - kube-system
+      - gatekeeper-system
+  parameters:
+    allowedCapabilities:
+      - NET_RAW
+      - NET_ADMIN
+    firewallNamespace: firewall

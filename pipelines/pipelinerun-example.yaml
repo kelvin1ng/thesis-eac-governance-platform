@@ -1,0 +1,32 @@
+# CHAPTER3_REFERENCE.md Figure 2: Example PipelineRun for Path A (firewall)
+# Use: kubectl create -f pipelines/pipelinerun-example.yaml
+# Adjust REPO_URL, IMAGE, and add dockerconfig secret for ECR push.
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: path-a-firewall-
+spec:
+  pipelineRef:
+    name: path-a-firewall
+  params:
+    - name: REPO_URL
+      value: "https://github.com/your-org/thesis-eac-governance-platform.git"
+    - name: REVISION
+      value: "main"
+    - name: IMAGE
+      value: "641133458487.dkr.ecr.us-east-1.amazonaws.com/thesis-eac/firewall:latest"
+  workspaces:
+    - name: source
+      volumeClaimTemplate:
+        spec:
+          accessModes: [ReadWriteOnce]
+          resources:
+            requests:
+              storage: 1Gi
+    - name: sbom-output
+      volumeClaimTemplate:
+        spec:
+          accessModes: [ReadWriteOnce]
+          resources:
+            requests:
+              storage: 100Mi

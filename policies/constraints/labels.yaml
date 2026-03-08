@@ -1,0 +1,32 @@
+# CHAPTER3_REFERENCE.md §3.2.2 Layer 2: Traceability labels constraint
+# Required: workload owner, deployment environment, compliance scope [37].
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredLabels
+metadata:
+  name: required-labels
+  annotations:
+    description: "3.2.2 — traceability labels required"
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+      - apiGroups: ["apps"]
+        kinds: ["Deployment", "ReplicaSet"]
+    excludedNamespaces:
+      - monitoring
+      - kube-system
+      - gatekeeper-system
+      - tekton-pipelines
+      - argocd
+  parameters:
+    labels:
+      - owner
+      - environment
+      - compliance-scope
+    excludedNamespaces:
+      - monitoring
+      - kube-system
+      - gatekeeper-system
+      - tekton-pipelines
+      - argocd
