@@ -31,6 +31,10 @@ fi
 
 TFVARS="$REPO_ROOT/environments/dev/terraform.tfvars"
 cd "$REPO_ROOT/infra"
+
+echo "Initializing Terraform backend (infra/)..."
+terraform init -reconfigure -backend-config=backend.hcl
+
 terraform destroy -auto-approve -var-file="$TFVARS"
 
 echo ""
