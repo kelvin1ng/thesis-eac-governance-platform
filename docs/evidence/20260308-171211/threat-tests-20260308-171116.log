@@ -1,0 +1,36 @@
+[threat-1] Unauthorized manifest change — validating Table 3 controls
+  [OK] Preventive: .github/BRANCH-PROTECTION.md exists (protected branches, required status checks)
+  [OK] Preventive: PR workflow pr-checks.yaml (required status checks for Path A)
+  [OK] Detective: Argo CD applications visible; sync status queryable (OutOfSync count: 1)
+[threat-1] Done. Corrective: Argo CD auto-sync (selfHeal) reverts unauthorized commits — see argocd/application-*.yaml syncPolicy.
+
+[threat-2] Unauthorized pipeline change — validating Table 3 preventive controls (CODEOWNERS)
+  [OK] Using .github/CODEOWNERS
+  [OK] Preventive: CODEOWNERS covers /policies/, /pipelines/, .github (Table 3 [50])
+  [OK] Path B policy workflow present (Conftest on policies/pipelines/.github changes)
+[threat-2] Done. Detective/corrective: repo audit logs and Git revert — see BRANCH-PROTECTION.md and CODEOWNERS.
+
+[threat-3] Artifact tampering — validating Table 3 controls
+  [OK] Preventive: image allowlist constraint (policies/constraints/allowlist.yaml)
+  [OK] Preventive: image signature/digest constraint present
+  [OK] Detective/Evidence: Trivy (SBOM/vulnerability) in pipeline
+  [OK] Preventive/Evidence: cosign in pipeline (sign/attest)
+  [OK] Preventive: admission denied image from non-allowlisted registry (Table 3)
+[threat-3] Done. Corrective: restore from immutable state, key revocation — see infra/ ECR and policies/.
+
+[threat-4] Direct kubectl in prod — validating Table 3 corrective control (Argo CD self-heal)
+  [SKIP] No deployment in namespace firewall
+
+[threat-5] Policy bypass — validating Table 3 preventive control (admission denial)
+  Applying Deployment without required labels (owner, environment, compliance-scope)...
+Error from server (Forbidden): error when creating "STDIN": admission webhook "validation.gatekeeper.sh" denied the request: [required-image-digest] Container image docker.io/library/nginx:alpine must use digest (sha256:...), not tag
+[required-labels] Deployment must have label "compliance-scope" for traceability
+[required-labels] Deployment must have label "environment" for traceability
+[required-labels] Deployment must have label "owner" for traceability
+[required-labels] Deployment pod template must have label "compliance-scope" for traceability
+[required-labels] Deployment pod template must have label "environment" for traceability
+[required-labels] Deployment pod template must have label "owner" for traceability
+  [OK] Preventive: Gatekeeper denied deployment (policy bypass blocked, Table 3 [54])
+[threat-5] Done. Detective: Prometheus alert GatekeeperConstraintViolations; see monitoring/prometheus/alerts.yaml.
+
+Table 3 threat test run complete.

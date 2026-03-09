@@ -1,0 +1,221 @@
+NAMESPACE           LAST SEEN   TYPE      REASON               OBJECT                                                            MESSAGE
+gatekeeper-system   50m         Normal    Pulling              pod/gatekeeper-controller-manager-648f896c99-nk5s6                Pulling image "openpolicyagent/gatekeeper:v3.15.1"
+gatekeeper-system   50m         Normal    Scheduled            pod/gatekeeper-controller-manager-648f896c99-845b6                Successfully assigned gatekeeper-system/gatekeeper-controller-manager-648f896c99-845b6 to ip-10-0-2-180.ec2.internal
+gatekeeper-system   50m         Normal    SuccessfulCreate     replicaset/gatekeeper-controller-manager-648f896c99               Created pod: gatekeeper-controller-manager-648f896c99-nk5s6
+gatekeeper-system   50m         Normal    SuccessfulCreate     replicaset/gatekeeper-controller-manager-648f896c99               Created pod: gatekeeper-controller-manager-648f896c99-ltxt4
+gatekeeper-system   50m         Normal    SuccessfulCreate     replicaset/gatekeeper-controller-manager-648f896c99               Created pod: gatekeeper-controller-manager-648f896c99-845b6
+gatekeeper-system   50m         Normal    Scheduled            pod/gatekeeper-audit-64979b9cfc-t6l4n                             Successfully assigned gatekeeper-system/gatekeeper-audit-64979b9cfc-t6l4n to ip-10-0-1-224.ec2.internal
+gatekeeper-system   50m         Normal    Scheduled            pod/gatekeeper-controller-manager-648f896c99-nk5s6                Successfully assigned gatekeeper-system/gatekeeper-controller-manager-648f896c99-nk5s6 to ip-10-0-2-180.ec2.internal
+gatekeeper-system   50m         Normal    Scheduled            pod/gatekeeper-controller-manager-648f896c99-ltxt4                Successfully assigned gatekeeper-system/gatekeeper-controller-manager-648f896c99-ltxt4 to ip-10-0-1-224.ec2.internal
+gatekeeper-system   50m         Normal    Pulling              pod/gatekeeper-audit-64979b9cfc-t6l4n                             Pulling image "openpolicyagent/gatekeeper:v3.15.1"
+gatekeeper-system   50m         Normal    SuccessfulCreate     replicaset/gatekeeper-audit-64979b9cfc                            Created pod: gatekeeper-audit-64979b9cfc-t6l4n
+gatekeeper-system   50m         Normal    ScalingReplicaSet    deployment/gatekeeper-controller-manager                          Scaled up replica set gatekeeper-controller-manager-648f896c99 to 3
+gatekeeper-system   50m         Normal    ScalingReplicaSet    deployment/gatekeeper-audit                                       Scaled up replica set gatekeeper-audit-64979b9cfc to 1
+gatekeeper-system   50m         Normal    Pulling              pod/gatekeeper-controller-manager-648f896c99-ltxt4                Pulling image "openpolicyagent/gatekeeper:v3.15.1"
+gatekeeper-system   50m         Normal    Pulling              pod/gatekeeper-controller-manager-648f896c99-845b6                Pulling image "openpolicyagent/gatekeeper:v3.15.1"
+gatekeeper-system   50m         Normal    Started              pod/gatekeeper-controller-manager-648f896c99-ltxt4                Started container manager
+gatekeeper-system   50m         Normal    Pulled               pod/gatekeeper-controller-manager-648f896c99-845b6                Successfully pulled image "openpolicyagent/gatekeeper:v3.15.1" in 1.929s (1.929s including waiting)
+gatekeeper-system   50m         Normal    Started              pod/gatekeeper-controller-manager-648f896c99-845b6                Started container manager
+gatekeeper-system   50m         Warning   Unhealthy            pod/gatekeeper-controller-manager-648f896c99-845b6                Readiness probe failed: HTTP probe failed with statuscode: 500
+gatekeeper-system   50m         Normal    Created              pod/gatekeeper-controller-manager-648f896c99-nk5s6                Created container: manager
+gatekeeper-system   50m         Normal    Started              pod/gatekeeper-controller-manager-648f896c99-nk5s6                Started container manager
+gatekeeper-system   50m         Normal    Created              pod/gatekeeper-controller-manager-648f896c99-845b6                Created container: manager
+gatekeeper-system   50m         Normal    Created              pod/gatekeeper-audit-64979b9cfc-t6l4n                             Created container: manager
+gatekeeper-system   50m         Normal    Started              pod/gatekeeper-audit-64979b9cfc-t6l4n                             Started container manager
+gatekeeper-system   50m         Normal    Pulled               pod/gatekeeper-audit-64979b9cfc-t6l4n                             Successfully pulled image "openpolicyagent/gatekeeper:v3.15.1" in 2.111s (2.111s including waiting)
+gatekeeper-system   50m         Warning   Unhealthy            pod/gatekeeper-controller-manager-648f896c99-nk5s6                Readiness probe failed: HTTP probe failed with statuscode: 500
+gatekeeper-system   50m         Normal    Pulled               pod/gatekeeper-controller-manager-648f896c99-ltxt4                Successfully pulled image "openpolicyagent/gatekeeper:v3.15.1" in 2s (2s including waiting)
+gatekeeper-system   50m         Normal    Created              pod/gatekeeper-controller-manager-648f896c99-ltxt4                Created container: manager
+gatekeeper-system   50m         Normal    Pulled               pod/gatekeeper-controller-manager-648f896c99-nk5s6                Successfully pulled image "openpolicyagent/gatekeeper:v3.15.1" in 2.016s (2.016s including waiting)
+gatekeeper-system   50m         Normal    Pulled               pod/gatekeeper-audit-64979b9cfc-t6l4n                             Successfully pulled image "openpolicyagent/gatekeeper:v3.15.1" in 135ms (135ms including waiting)
+gatekeeper-system   50m         Normal    ScalingReplicaSet    deployment/gatekeeper-controller-manager                          Scaled up replica set gatekeeper-controller-manager-666994bb4f to 1
+gatekeeper-system   50m         Normal    SuccessfulCreate     replicaset/gatekeeper-controller-manager-666994bb4f               Created pod: gatekeeper-controller-manager-666994bb4f-vrczv
+gatekeeper-system   50m         Normal    Scheduled            pod/gatekeeper-controller-manager-666994bb4f-vrczv                Successfully assigned gatekeeper-system/gatekeeper-controller-manager-666994bb4f-vrczv to ip-10-0-1-224.ec2.internal
+gatekeeper-system   50m         Normal    Pulling              pod/gatekeeper-controller-manager-666994bb4f-vrczv                Pulling image "openpolicyagent/gatekeeper:v3.15.1"
+gatekeeper-system   50m         Normal    Pulled               pod/gatekeeper-controller-manager-666994bb4f-vrczv                Successfully pulled image "openpolicyagent/gatekeeper:v3.15.1" in 140ms (140ms including waiting)
+gatekeeper-system   50m         Normal    Killing              pod/gatekeeper-controller-manager-648f896c99-nk5s6                Stopping container manager
+gatekeeper-system   50m         Normal    ScalingReplicaSet    deployment/gatekeeper-controller-manager                          Scaled down replica set gatekeeper-controller-manager-648f896c99 to 2 from 3
+gatekeeper-system   50m         Normal    Created              pod/gatekeeper-controller-manager-666994bb4f-vrczv                Created container: manager
+gatekeeper-system   50m         Normal    Started              pod/gatekeeper-controller-manager-666994bb4f-vrczv                Started container manager
+gatekeeper-system   50m         Normal    SuccessfulDelete     replicaset/gatekeeper-controller-manager-648f896c99               Deleted pod: gatekeeper-controller-manager-648f896c99-nk5s6
+gatekeeper-system   50m         Normal    Started              pod/gatekeeper-controller-manager-666994bb4f-z87bh                Started container manager
+gatekeeper-system   50m         Normal    ScalingReplicaSet    deployment/gatekeeper-controller-manager                          Scaled up replica set gatekeeper-controller-manager-666994bb4f to 2 from 1
+gatekeeper-system   50m         Normal    SuccessfulCreate     replicaset/gatekeeper-controller-manager-666994bb4f               Created pod: gatekeeper-controller-manager-666994bb4f-z87bh
+gatekeeper-system   50m         Normal    Created              pod/gatekeeper-controller-manager-666994bb4f-z87bh                Created container: manager
+gatekeeper-system   50m         Normal    Pulled               pod/gatekeeper-controller-manager-666994bb4f-z87bh                Successfully pulled image "openpolicyagent/gatekeeper:v3.15.1" in 165ms (165ms including waiting)
+gatekeeper-system   50m         Normal    Pulling              pod/gatekeeper-controller-manager-666994bb4f-z87bh                Pulling image "openpolicyagent/gatekeeper:v3.15.1"
+gatekeeper-system   50m         Normal    Scheduled            pod/gatekeeper-controller-manager-666994bb4f-z87bh                Successfully assigned gatekeeper-system/gatekeeper-controller-manager-666994bb4f-z87bh to ip-10-0-2-180.ec2.internal
+gatekeeper-system   50m         Normal    Scheduled            pod/gatekeeper-controller-manager-666994bb4f-st6jj                Successfully assigned gatekeeper-system/gatekeeper-controller-manager-666994bb4f-st6jj to ip-10-0-2-180.ec2.internal
+gatekeeper-system   50m         Normal    ScalingReplicaSet    deployment/gatekeeper-controller-manager                          Scaled up replica set gatekeeper-controller-manager-666994bb4f to 3 from 2
+gatekeeper-system   50m         Normal    ScalingReplicaSet    deployment/gatekeeper-controller-manager                          Scaled down replica set gatekeeper-controller-manager-648f896c99 to 1 from 2
+gatekeeper-system   50m         Normal    SuccessfulCreate     replicaset/gatekeeper-controller-manager-666994bb4f               Created pod: gatekeeper-controller-manager-666994bb4f-st6jj
+gatekeeper-system   50m         Normal    Killing              pod/gatekeeper-controller-manager-648f896c99-ltxt4                Stopping container manager
+gatekeeper-system   50m         Normal    SuccessfulDelete     replicaset/gatekeeper-controller-manager-648f896c99               Deleted pod: gatekeeper-controller-manager-648f896c99-ltxt4
+gatekeeper-system   50m         Normal    Pulled               pod/gatekeeper-controller-manager-666994bb4f-st6jj                Successfully pulled image "openpolicyagent/gatekeeper:v3.15.1" in 150ms (150ms including waiting)
+gatekeeper-system   50m         Normal    Pulling              pod/gatekeeper-controller-manager-666994bb4f-st6jj                Pulling image "openpolicyagent/gatekeeper:v3.15.1"
+gatekeeper-system   50m         Normal    Started              pod/gatekeeper-controller-manager-666994bb4f-st6jj                Started container manager
+gatekeeper-system   50m         Normal    Created              pod/gatekeeper-controller-manager-666994bb4f-st6jj                Created container: manager
+gatekeeper-system   50m         Normal    SuccessfulDelete     replicaset/gatekeeper-controller-manager-648f896c99               Deleted pod: gatekeeper-controller-manager-648f896c99-845b6
+gatekeeper-system   50m         Normal    Killing              pod/gatekeeper-controller-manager-648f896c99-845b6                Stopping container manager
+gatekeeper-system   50m         Normal    ScalingReplicaSet    deployment/gatekeeper-controller-manager                          Scaled down replica set gatekeeper-controller-manager-648f896c99 to 0 from 1
+argocd              50m         Normal    SuccessfulCreate     replicaset/argocd-applicationset-controller-684459d45b            Created pod: argocd-applicationset-controller-684459d45b-rxhcp
+argocd              50m         Normal    ScalingReplicaSet    deployment/argocd-applicationset-controller                       Scaled up replica set argocd-applicationset-controller-684459d45b to 1
+argocd              50m         Normal    ScalingReplicaSet    deployment/argocd-repo-server                                     Scaled up replica set argocd-repo-server-66ccd878 to 1
+argocd              50m         Normal    Scheduled            pod/argocd-redis-6664bd4d8c-64lbr                                 Successfully assigned argocd/argocd-redis-6664bd4d8c-64lbr to ip-10-0-1-224.ec2.internal
+argocd              50m         Normal    Scheduled            pod/argocd-notifications-controller-b48df5667-vnzdj               Successfully assigned argocd/argocd-notifications-controller-b48df5667-vnzdj to ip-10-0-2-180.ec2.internal
+argocd              50m         Normal    ScalingReplicaSet    deployment/argocd-server                                          Scaled up replica set argocd-server-85c666f59b to 1
+argocd              50m         Normal    ScalingReplicaSet    deployment/argocd-dex-server                                      Scaled up replica set argocd-dex-server-796965b6dd to 1
+argocd              50m         Normal    SuccessfulCreate     replicaset/argocd-dex-server-796965b6dd                           Created pod: argocd-dex-server-796965b6dd-9nwv5
+argocd              50m         Normal    SuccessfulCreate     replicaset/argocd-repo-server-66ccd878                            Created pod: argocd-repo-server-66ccd878-j6rr2
+argocd              50m         Normal    Pulling              pod/argocd-dex-server-796965b6dd-9nwv5                            Pulling image "quay.io/argoproj/argocd:v3.3.2"
+argocd              50m         Normal    Pulling              pod/argocd-notifications-controller-b48df5667-vnzdj               Pulling image "quay.io/argoproj/argocd:v3.3.2"
+argocd              50m         Normal    Scheduled            pod/argocd-repo-server-66ccd878-j6rr2                             Successfully assigned argocd/argocd-repo-server-66ccd878-j6rr2 to ip-10-0-2-180.ec2.internal
+argocd              50m         Normal    Scheduled            pod/argocd-applicationset-controller-684459d45b-rxhcp             Successfully assigned argocd/argocd-applicationset-controller-684459d45b-rxhcp to ip-10-0-1-224.ec2.internal
+argocd              50m         Normal    ScalingReplicaSet    deployment/argocd-redis                                           Scaled up replica set argocd-redis-6664bd4d8c to 1
+argocd              50m         Normal    ScalingReplicaSet    deployment/argocd-notifications-controller                        Scaled up replica set argocd-notifications-controller-b48df5667 to 1
+argocd              50m         Normal    SuccessfulCreate     replicaset/argocd-notifications-controller-b48df5667              Created pod: argocd-notifications-controller-b48df5667-vnzdj
+argocd              50m         Normal    SuccessfulCreate     replicaset/argocd-redis-6664bd4d8c                                Created pod: argocd-redis-6664bd4d8c-64lbr
+argocd              50m         Normal    Scheduled            pod/argocd-dex-server-796965b6dd-9nwv5                            Successfully assigned argocd/argocd-dex-server-796965b6dd-9nwv5 to ip-10-0-1-224.ec2.internal
+argocd              50m         Normal    Pulling              pod/argocd-redis-6664bd4d8c-64lbr                                 Pulling image "quay.io/argoproj/argocd:v3.3.2"
+argocd              50m         Normal    Scheduled            pod/argocd-application-controller-0                               Successfully assigned argocd/argocd-application-controller-0 to ip-10-0-2-180.ec2.internal
+argocd              50m         Normal    SuccessfulCreate     replicaset/argocd-server-85c666f59b                               Created pod: argocd-server-85c666f59b-hdr94
+argocd              48m         Normal    Pulling              pod/argocd-applicationset-controller-684459d45b-rxhcp             Pulling image "quay.io/argoproj/argocd:v3.3.2"
+argocd              50m         Normal    SuccessfulCreate     statefulset/argocd-application-controller                         create Pod argocd-application-controller-0 in StatefulSet argocd-application-controller successful
+argocd              50m         Normal    Pulling              pod/argocd-repo-server-66ccd878-j6rr2                             Pulling image "quay.io/argoproj/argocd:v3.3.2"
+argocd              50m         Normal    Scheduled            pod/argocd-server-85c666f59b-hdr94                                Successfully assigned argocd/argocd-server-85c666f59b-hdr94 to ip-10-0-1-224.ec2.internal
+argocd              50m         Normal    Pulling              pod/argocd-server-85c666f59b-hdr94                                Pulling image "quay.io/argoproj/argocd:v3.3.2"
+argocd              50m         Normal    Pulling              pod/argocd-application-controller-0                               Pulling image "quay.io/argoproj/argocd:v3.3.2"
+argocd              50m         Normal    Created              pod/argocd-repo-server-66ccd878-j6rr2                             Created container: copyutil
+argocd              50m         Normal    Pulled               pod/argocd-repo-server-66ccd878-j6rr2                             Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 6.522s (6.523s including waiting)
+argocd              50m         Normal    Pulled               pod/argocd-notifications-controller-b48df5667-vnzdj               Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 6.894s (6.894s including waiting)
+argocd              50m         Warning   Failed               pod/argocd-application-controller-0                               Error: secret "argocd-redis" not found
+argocd              50m         Normal    Pulled               pod/argocd-application-controller-0                               Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 5.523s (5.523s including waiting)
+argocd              50m         Normal    Created              pod/argocd-notifications-controller-b48df5667-vnzdj               Created container: argocd-notifications-controller
+argocd              50m         Normal    Pulled               pod/argocd-applicationset-controller-684459d45b-rxhcp             Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 6.899s (6.899s including waiting)
+argocd              50m         Normal    Created              pod/argocd-redis-6664bd4d8c-64lbr                                 Created container: secret-init
+argocd              50m         Normal    Pulled               pod/argocd-server-85c666f59b-hdr94                                Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 6.364s (6.364s including waiting)
+argocd              50m         Warning   Failed               pod/argocd-server-85c666f59b-hdr94                                Error: secret "argocd-redis" not found
+argocd              50m         Normal    Pulled               pod/argocd-redis-6664bd4d8c-64lbr                                 Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 7.092s (7.092s including waiting)
+argocd              50m         Normal    Started              pod/argocd-repo-server-66ccd878-j6rr2                             Started container copyutil
+argocd              50m         Normal    Started              pod/argocd-dex-server-796965b6dd-9nwv5                            Started container copyutil
+argocd              50m         Normal    Created              pod/argocd-dex-server-796965b6dd-9nwv5                            Created container: copyutil
+argocd              50m         Normal    Pulled               pod/argocd-dex-server-796965b6dd-9nwv5                            Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 7.305s (7.305s including waiting)
+argocd              48m         Normal    Started              pod/argocd-applicationset-controller-684459d45b-rxhcp             Started container argocd-applicationset-controller
+argocd              50m         Normal    Started              pod/argocd-notifications-controller-b48df5667-vnzdj               Started container argocd-notifications-controller
+argocd              48m         Normal    Created              pod/argocd-applicationset-controller-684459d45b-rxhcp             Created container: argocd-applicationset-controller
+argocd              50m         Normal    Started              pod/argocd-redis-6664bd4d8c-64lbr                                 Started container secret-init
+argocd              50m         Normal    Created              pod/argocd-server-85c666f59b-hdr94                                Created container: argocd-server
+argocd              50m         Normal    Pulled               pod/argocd-server-85c666f59b-hdr94                                Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 256ms (256ms including waiting)
+argocd              50m         Normal    Created              pod/argocd-application-controller-0                               Created container: argocd-application-controller
+argocd              50m         Normal    Pulled               pod/argocd-application-controller-0                               Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 958ms (958ms including waiting)
+argocd              50m         Normal    Started              pod/argocd-repo-server-66ccd878-j6rr2                             Started container argocd-repo-server
+argocd              50m         Normal    Started              pod/argocd-server-85c666f59b-hdr94                                Started container argocd-server
+argocd              50m         Normal    Pulling              pod/argocd-redis-6664bd4d8c-64lbr                                 Pulling image "public.ecr.aws/docker/library/redis:8.2.3-alpine"
+argocd              50m         Normal    Pulling              pod/argocd-dex-server-796965b6dd-9nwv5                            Pulling image "ghcr.io/dexidp/dex:v2.43.0"
+argocd              50m         Normal    Started              pod/argocd-application-controller-0                               Started container argocd-application-controller
+argocd              50m         Normal    Pulling              pod/argocd-repo-server-66ccd878-j6rr2                             Pulling image "quay.io/argoproj/argocd:v3.3.2"
+argocd              50m         Normal    Pulled               pod/argocd-repo-server-66ccd878-j6rr2                             Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 78ms (78ms including waiting)
+argocd              50m         Normal    Created              pod/argocd-repo-server-66ccd878-j6rr2                             Created container: argocd-repo-server
+argocd              50m         Normal    Pulled               pod/argocd-dex-server-796965b6dd-9nwv5                            Successfully pulled image "ghcr.io/dexidp/dex:v2.43.0" in 2.64s (2.64s including waiting)
+argocd              50m         Normal    Pulled               pod/argocd-redis-6664bd4d8c-64lbr                                 Successfully pulled image "public.ecr.aws/docker/library/redis:8.2.3-alpine" in 2.275s (2.275s including waiting)
+argocd              50m         Normal    Created              pod/argocd-dex-server-796965b6dd-9nwv5                            Created container: dex
+argocd              50m         Normal    Started              pod/argocd-redis-6664bd4d8c-64lbr                                 Started container redis
+argocd              50m         Normal    Created              pod/argocd-redis-6664bd4d8c-64lbr                                 Created container: redis
+argocd              50m         Normal    Started              pod/argocd-dex-server-796965b6dd-9nwv5                            Started container dex
+argocd              48m         Normal    Pulled               pod/argocd-applicationset-controller-684459d45b-rxhcp             Successfully pulled image "quay.io/argoproj/argocd:v3.3.2" in 115ms (115ms including waiting)
+argocd              42m         Normal    ResourceUpdated      application/firewall                                              Updated health status:  -> Healthy
+argocd              42m         Normal    ResourceUpdated      application/firewall                                              Updated sync status:  -> Unknown
+argocd              42m         Normal    ResourceUpdated      application/policies                                              Updated health status:  -> Healthy
+argocd              42m         Normal    ResourceUpdated      application/policies                                              Updated sync status:  -> Unknown
+argocd              39m         Normal    ResourceUpdated      application/firewall                                              Updated health status: Healthy -> Unknown
+argocd              39m         Normal    ResourceUpdated      application/policies                                              Updated health status: Healthy -> Unknown
+argocd              37m         Normal    ResourceUpdated      application/firewall                                              Updated health status: Unknown -> Healthy
+argocd              37m         Normal    ResourceUpdated      application/policies                                              Updated health status: Unknown -> Healthy
+argocd              14m         Normal    ResourceUpdated      application/policies                                              Updated sync status: Unknown -> OutOfSync
+argocd              14m         Normal    OperationStarted     application/policies                                              Initiated automated sync to [dff1234fa117d3524ccea0ffbdb2f82d08333929]
+argocd              9m54s       Normal    ResourceUpdated      application/firewall                                              Updated health status: Healthy -> Missing
+argocd              9m54s       Normal    OperationStarted     application/firewall                                              Initiated automated sync to [cf912680ceb2758e51e09f2bcee8b56f8e79933e]
+argocd              9m54s       Normal    ResourceUpdated      application/firewall                                              Updated sync status: Unknown -> OutOfSync
+argocd              9m37s       Normal    OperationCompleted   application/policies                                              Sync operation to dff1234fa117d3524ccea0ffbdb2f82d08333929 succeeded
+argocd              9m37s       Normal    ResourceUpdated      application/policies                                              Updated sync status: OutOfSync -> Synced
+monitoring          7m15s       Normal    Pulling              pod/kps-kube-prometheus-stack-admission-create-bzjrb              Pulling image "ghcr.io/jkroepke/kube-webhook-certgen:1.7.8"
+monitoring          7m15s       Normal    SuccessfulCreate     job/kps-kube-prometheus-stack-admission-create                    Created pod: kps-kube-prometheus-stack-admission-create-bzjrb
+monitoring          7m15s       Normal    Scheduled            pod/kps-kube-prometheus-stack-admission-create-bzjrb              Successfully assigned monitoring/kps-kube-prometheus-stack-admission-create-bzjrb to ip-10-0-1-224.ec2.internal
+monitoring          7m14s       Normal    Created              pod/kps-kube-prometheus-stack-admission-create-bzjrb              Created container: create
+monitoring          7m14s       Normal    Pulled               pod/kps-kube-prometheus-stack-admission-create-bzjrb              Successfully pulled image "ghcr.io/jkroepke/kube-webhook-certgen:1.7.8" in 1.007s (1.007s including waiting)
+monitoring          7m14s       Normal    Started              pod/kps-kube-prometheus-stack-admission-create-bzjrb              Started container create
+monitoring          7m11s       Normal    Completed            job/kps-kube-prometheus-stack-admission-create                    Job completed
+monitoring          7m10s       Normal    SuccessfulCreate     replicaset/kps-kube-state-metrics-5bf8d94859                      Created pod: kps-kube-state-metrics-5bf8d94859-mlvf6
+monitoring          7m10s       Normal    Scheduled            pod/kps-prometheus-node-exporter-q2wjn                            Successfully assigned monitoring/kps-prometheus-node-exporter-q2wjn to ip-10-0-1-224.ec2.internal
+monitoring          7m10s       Normal    SuccessfulCreate     daemonset/kps-prometheus-node-exporter                            Created pod: kps-prometheus-node-exporter-jnq7f
+monitoring          7m10s       Normal    ScalingReplicaSet    deployment/kps-grafana                                            Scaled up replica set kps-grafana-9f56f7576 to 1
+monitoring          7m10s       Normal    SuccessfulCreate     daemonset/kps-prometheus-node-exporter                            Created pod: kps-prometheus-node-exporter-q2wjn
+monitoring          7m10s       Normal    Scheduled            pod/kps-prometheus-node-exporter-jnq7f                            Successfully assigned monitoring/kps-prometheus-node-exporter-jnq7f to ip-10-0-2-180.ec2.internal
+monitoring          7m10s       Normal    ScalingReplicaSet    deployment/kps-kube-state-metrics                                 Scaled up replica set kps-kube-state-metrics-5bf8d94859 to 1
+monitoring          7m10s       Normal    ScalingReplicaSet    deployment/kps-kube-prometheus-stack-operator                     Scaled up replica set kps-kube-prometheus-stack-operator-6465cc476f to 1
+monitoring          7m9s        Normal    Pulling              pod/kps-kube-prometheus-stack-operator-6465cc476f-qhmfz           Pulling image "quay.io/prometheus-operator/prometheus-operator:v0.89.0"
+monitoring          7m9s        Normal    Pulling              pod/kps-prometheus-node-exporter-jnq7f                            Pulling image "quay.io/prometheus/node-exporter:v1.10.2"
+monitoring          7m9s        Normal    Pulling              pod/kps-kube-state-metrics-5bf8d94859-mlvf6                       Pulling image "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.18.0"
+monitoring          7m9s        Normal    Scheduled            pod/kps-kube-state-metrics-5bf8d94859-mlvf6                       Successfully assigned monitoring/kps-kube-state-metrics-5bf8d94859-mlvf6 to ip-10-0-1-224.ec2.internal
+monitoring          7m9s        Normal    Scheduled            pod/kps-grafana-9f56f7576-kc8z8                                   Successfully assigned monitoring/kps-grafana-9f56f7576-kc8z8 to ip-10-0-1-224.ec2.internal
+monitoring          7m10s       Normal    SuccessfulCreate     replicaset/kps-kube-prometheus-stack-operator-6465cc476f          Created pod: kps-kube-prometheus-stack-operator-6465cc476f-qhmfz
+monitoring          7m9s        Normal    Pulling              pod/kps-prometheus-node-exporter-q2wjn                            Pulling image "quay.io/prometheus/node-exporter:v1.10.2"
+monitoring          7m10s       Normal    SuccessfulCreate     replicaset/kps-grafana-9f56f7576                                  Created pod: kps-grafana-9f56f7576-kc8z8
+monitoring          7m9s        Normal    Scheduled            pod/kps-kube-prometheus-stack-operator-6465cc476f-qhmfz           Successfully assigned monitoring/kps-kube-prometheus-stack-operator-6465cc476f-qhmfz to ip-10-0-2-180.ec2.internal
+monitoring          7m9s        Normal    Pulling              pod/kps-grafana-9f56f7576-kc8z8                                   Pulling image "quay.io/kiwigrid/k8s-sidecar:2.5.0"
+monitoring          7m8s        Normal    Pulled               pod/kps-prometheus-node-exporter-jnq7f                            Successfully pulled image "quay.io/prometheus/node-exporter:v1.10.2" in 1.152s (1.152s including waiting)
+monitoring          7m8s        Normal    Created              pod/kps-prometheus-node-exporter-jnq7f                            Created container: node-exporter
+monitoring          7m8s        Normal    Started              pod/kps-prometheus-node-exporter-jnq7f                            Started container node-exporter
+monitoring          7m8s        Normal    Pulled               pod/kps-prometheus-node-exporter-q2wjn                            Successfully pulled image "quay.io/prometheus/node-exporter:v1.10.2" in 1.091s (1.091s including waiting)
+monitoring          7m8s        Normal    Created              pod/kps-prometheus-node-exporter-q2wjn                            Created container: node-exporter
+monitoring          7m8s        Normal    Started              pod/kps-prometheus-node-exporter-q2wjn                            Started container node-exporter
+monitoring          7m7s        Normal    Pulled               pod/kps-kube-prometheus-stack-operator-6465cc476f-qhmfz           Successfully pulled image "quay.io/prometheus-operator/prometheus-operator:v0.89.0" in 1.514s (1.514s including waiting)
+monitoring          7m7s        Normal    Created              pod/kps-kube-prometheus-stack-operator-6465cc476f-qhmfz           Created container: kube-prometheus-stack
+monitoring          7m7s        Normal    Started              pod/kps-kube-prometheus-stack-operator-6465cc476f-qhmfz           Started container kube-prometheus-stack
+monitoring          7m6s        Normal    Scheduled            pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Successfully assigned monitoring/alertmanager-kps-kube-prometheus-stack-alertmanager-0 to ip-10-0-2-180.ec2.internal
+monitoring          7m6s        Normal    Pulled               pod/kps-grafana-9f56f7576-kc8z8                                   Container image "quay.io/kiwigrid/k8s-sidecar:2.5.0" already present on machine
+monitoring          7m6s        Normal    SuccessfulCreate     statefulset/prometheus-kps-kube-prometheus-stack-prometheus       create Pod prometheus-kps-kube-prometheus-stack-prometheus-0 in StatefulSet prometheus-kps-kube-prometheus-stack-prometheus successful
+monitoring          7m6s        Normal    Pulling              pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Pulling image "quay.io/prometheus-operator/prometheus-config-reloader:v0.89.0"
+monitoring          7m6s        Normal    Scheduled            pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Successfully assigned monitoring/prometheus-kps-kube-prometheus-stack-prometheus-0 to ip-10-0-2-180.ec2.internal
+monitoring          7m6s        Normal    Pulling              pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Pulling image "quay.io/prometheus-operator/prometheus-config-reloader:v0.89.0"
+monitoring          7m7s        Normal    SuccessfulCreate     statefulset/alertmanager-kps-kube-prometheus-stack-alertmanager   create Pod alertmanager-kps-kube-prometheus-stack-alertmanager-0 in StatefulSet alertmanager-kps-kube-prometheus-stack-alertmanager successful
+monitoring          7m6s        Normal    Pulled               pod/kps-grafana-9f56f7576-kc8z8                                   Successfully pulled image "quay.io/kiwigrid/k8s-sidecar:2.5.0" in 3.132s (3.132s including waiting)
+monitoring          7m6s        Normal    Started              pod/kps-kube-state-metrics-5bf8d94859-mlvf6                       Started container kube-state-metrics
+monitoring          7m6s        Normal    Created              pod/kps-kube-state-metrics-5bf8d94859-mlvf6                       Created container: kube-state-metrics
+monitoring          7m6s        Normal    Pulled               pod/kps-kube-state-metrics-5bf8d94859-mlvf6                       Successfully pulled image "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.18.0" in 2.23s (2.23s including waiting)
+monitoring          7m6s        Normal    Created              pod/kps-grafana-9f56f7576-kc8z8                                   Created container: grafana-sc-dashboard
+monitoring          7m6s        Normal    Started              pod/kps-grafana-9f56f7576-kc8z8                                   Started container grafana-sc-dashboard
+monitoring          7m6s        Normal    Created              pod/kps-grafana-9f56f7576-kc8z8                                   Created container: grafana-sc-datasources
+monitoring          7m5s        Normal    Started              pod/kps-grafana-9f56f7576-kc8z8                                   Started container grafana-sc-datasources
+monitoring          7m5s        Normal    Started              pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Started container init-config-reloader
+monitoring          7m5s        Normal    Pulling              pod/kps-grafana-9f56f7576-kc8z8                                   Pulling image "docker.io/grafana/grafana:12.4.0"
+monitoring          7m5s        Normal    Started              pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Started container init-config-reloader
+monitoring          7m5s        Normal    Created              pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Created container: init-config-reloader
+monitoring          7m5s        Normal    Pulled               pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Successfully pulled image "quay.io/prometheus-operator/prometheus-config-reloader:v0.89.0" in 999ms (999ms including waiting)
+monitoring          7m5s        Normal    Pulled               pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Successfully pulled image "quay.io/prometheus-operator/prometheus-config-reloader:v0.89.0" in 1.13s (1.13s including waiting)
+monitoring          7m5s        Normal    Created              pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Created container: init-config-reloader
+monitoring          7m4s        Normal    Pulling              pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Pulling image "quay.io/prometheus/prometheus:v3.10.0"
+monitoring          7m4s        Normal    Pulling              pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Pulling image "quay.io/prometheus/alertmanager:v0.31.1"
+monitoring          7m2s        Normal    Created              pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Created container: alertmanager
+monitoring          7m2s        Normal    Pulled               pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Successfully pulled image "quay.io/prometheus/alertmanager:v0.31.1" in 2.288s (2.288s including waiting)
+monitoring          7m1s        Normal    Created              pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Created container: config-reloader
+monitoring          7m1s        Normal    Pulled               pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Container image "quay.io/prometheus-operator/prometheus-config-reloader:v0.89.0" already present on machine
+monitoring          7m1s        Normal    Started              pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Started container alertmanager
+monitoring          7m1s        Normal    Started              pod/alertmanager-kps-kube-prometheus-stack-alertmanager-0         Started container config-reloader
+monitoring          6m59s       Normal    Created              pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Created container: prometheus
+monitoring          6m59s       Normal    Pulled               pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Successfully pulled image "quay.io/prometheus/prometheus:v3.10.0" in 5.146s (5.146s including waiting)
+monitoring          6m59s       Normal    Created              pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Created container: config-reloader
+monitoring          6m59s       Normal    Pulled               pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Container image "quay.io/prometheus-operator/prometheus-config-reloader:v0.89.0" already present on machine
+monitoring          6m59s       Normal    Started              pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Started container prometheus
+monitoring          6m58s       Normal    Started              pod/prometheus-kps-kube-prometheus-stack-prometheus-0             Started container config-reloader
+monitoring          6m49s       Normal    Started              pod/kps-grafana-9f56f7576-kc8z8                                   Started container grafana
+monitoring          6m49s       Normal    Created              pod/kps-grafana-9f56f7576-kc8z8                                   Created container: grafana
+monitoring          6m49s       Normal    Pulled               pod/kps-grafana-9f56f7576-kc8z8                                   Successfully pulled image "docker.io/grafana/grafana:12.4.0" in 16.538s (16.538s including waiting)
+monitoring          6m46s       Warning   Unhealthy            pod/kps-grafana-9f56f7576-kc8z8                                   Readiness probe failed: Get "http://10.0.1.9:3000/api/health": dial tcp 10.0.1.9:3000: connect: connection refused
+monitoring          6m35s       Normal    SuccessfulCreate     job/kps-kube-prometheus-stack-admission-patch                     Created pod: kps-kube-prometheus-stack-admission-patch-8nvsq
+monitoring          6m35s       Normal    Pulled               pod/kps-kube-prometheus-stack-admission-patch-8nvsq               Container image "ghcr.io/jkroepke/kube-webhook-certgen:1.7.8" already present on machine
+monitoring          6m35s       Normal    Created              pod/kps-kube-prometheus-stack-admission-patch-8nvsq               Created container: patch
+monitoring          6m35s       Normal    Started              pod/kps-kube-prometheus-stack-admission-patch-8nvsq               Started container patch
+monitoring          6m35s       Normal    Scheduled            pod/kps-kube-prometheus-stack-admission-patch-8nvsq               Successfully assigned monitoring/kps-kube-prometheus-stack-admission-patch-8nvsq to ip-10-0-1-224.ec2.internal
+monitoring          6m32s       Normal    Completed            job/kps-kube-prometheus-stack-admission-patch                     Job completed
+argocd              4m39s       Warning   OperationCompleted   application/firewall                                              Sync operation to cf912680ceb2758e51e09f2bcee8b56f8e79933e failed: one or more objects failed to apply, reason: admission webhook "validation.gatekeeper.sh" denied the request: [required-image-digest] Container image 641133458487.dkr.ecr.us-east-1.amazonaws.com/thesis-eac/firewall:1 must use digest (sha256:...), not tag (retried 5 times).

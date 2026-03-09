@@ -1,0 +1,11 @@
+NAME                                                                ENFORCEMENT-ACTION   TOTAL-VIOLATIONS
+k8sallowedregistries.constraints.gatekeeper.sh/allowed-registries                        22
+
+NAME                                                                  ENFORCEMENT-ACTION   TOTAL-VIOLATIONS
+k8sfirewallnetworking.constraints.gatekeeper.sh/firewall-networking                        0
+
+NAME                                                                     ENFORCEMENT-ACTION   TOTAL-VIOLATIONS
+k8srequiredimagedigest.constraints.gatekeeper.sh/required-image-digest                        0
+
+NAME                                                          ENFORCEMENT-ACTION   TOTAL-VIOLATIONS
+k8srequiredlabels.constraints.gatekeeper.sh/required-labels                        0

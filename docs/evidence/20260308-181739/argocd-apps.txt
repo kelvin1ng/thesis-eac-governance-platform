@@ -1,0 +1,3 @@
+NAME       SYNC STATUS   HEALTH STATUS
+firewall   OutOfSync     Missing
+policies   Synced        Healthy

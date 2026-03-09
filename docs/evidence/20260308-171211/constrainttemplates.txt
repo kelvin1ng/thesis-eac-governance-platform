@@ -1,0 +1,5 @@
+NAME                     AGE
+k8sallowedregistries     43m
+k8sfirewallnetworking    43m
+k8srequiredimagedigest   43m
+k8srequiredlabels        43m

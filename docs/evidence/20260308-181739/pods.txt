@@ -1,0 +1,25 @@
+NAMESPACE           NAME                                                    READY   STATUS    RESTARTS       AGE
+argocd              argocd-application-controller-0                         1/1     Running   0              115m
+argocd              argocd-applicationset-controller-684459d45b-rxhcp       1/1     Running   1 (113m ago)   115m
+argocd              argocd-dex-server-796965b6dd-9nwv5                      1/1     Running   0              115m
+argocd              argocd-notifications-controller-b48df5667-vnzdj         1/1     Running   0              115m
+argocd              argocd-redis-6664bd4d8c-64lbr                           1/1     Running   0              115m
+argocd              argocd-repo-server-66ccd878-j6rr2                       1/1     Running   0              115m
+argocd              argocd-server-85c666f59b-hdr94                          1/1     Running   0              115m
+gatekeeper-system   gatekeeper-audit-64979b9cfc-t6l4n                       1/1     Running   1 (116m ago)   116m
+gatekeeper-system   gatekeeper-controller-manager-666994bb4f-st6jj          1/1     Running   0              115m
+gatekeeper-system   gatekeeper-controller-manager-666994bb4f-vrczv          1/1     Running   0              115m
+gatekeeper-system   gatekeeper-controller-manager-666994bb4f-z87bh          1/1     Running   0              115m
+kube-system         aws-node-5gpht                                          2/2     Running   0              4h43m
+kube-system         aws-node-ql8vc                                          2/2     Running   0              4h43m
+kube-system         coredns-54d6f577c6-pbqxg                                1/1     Running   0              4h47m
+kube-system         coredns-54d6f577c6-shm24                                1/1     Running   0              4h47m
+kube-system         kube-proxy-fnn4q                                        1/1     Running   0              4h43m
+kube-system         kube-proxy-fx9vw                                        1/1     Running   0              4h43m
+monitoring          alertmanager-kps-kube-prometheus-stack-alertmanager-0   2/2     Running   0              72m
+monitoring          kps-grafana-9f56f7576-kc8z8                             3/3     Running   0              72m
+monitoring          kps-kube-prometheus-stack-operator-6465cc476f-qhmfz     1/1     Running   0              72m
+monitoring          kps-kube-state-metrics-5bf8d94859-mlvf6                 1/1     Running   0              72m
+monitoring          kps-prometheus-node-exporter-jnq7f                      1/1     Running   0              72m
+monitoring          kps-prometheus-node-exporter-q2wjn                      1/1     Running   0              72m
+monitoring          prometheus-kps-kube-prometheus-stack-prometheus-0       2/2     Running   0              72m
