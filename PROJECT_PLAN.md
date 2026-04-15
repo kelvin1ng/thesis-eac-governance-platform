@@ -1,6 +1,6 @@
 # thesis-eac-governance-platform — Project Plan
 
-**Reference:** CHAPTER3_REFERENCE.md (full fidelity). Target: minimal viable Go-based containerized virtual firewall CNF with configurable rules (port 8080, netfilter stub for gosec).
+**Reference:** Target: minimal viable Go-based containerized virtual firewall CNF with configurable rules (port 8080, netfilter stub for gosec).
 
 ---
 
@@ -162,7 +162,6 @@ thesis-eac-governance-platform/
 │   │   └── 5-policy-bypass.sh
 │   └── README.md
 │
-├── CHAPTER3_REFERENCE.md                     # Mandatory reference (unchanged)
 ├── PROJECT_PLAN.md                            # This file
 ├── README.md                                 # Setup, Path A/B, principles, Ch4 evidence
 ├── CODEOWNERS                                # Root CODEOWNERS (policies/, pipelines/)
@@ -198,4 +197,4 @@ thesis-eac-governance-platform/
 
 ---
 
-*All files in the repo MUST include comments referencing exact sections/tables from CHAPTER3_REFERENCE.md (e.g. "3.2.2 Layer 2", "Table 1", "Table 3").*
+
