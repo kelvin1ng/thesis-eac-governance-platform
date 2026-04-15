@@ -16,7 +16,7 @@ If you discover a security issue in this repository or the deployed platform, pl
 ## Practices
 
 - **Secrets:** No long-lived credentials in repo; use IAM roles, OIDC, or external secret managers. `backend.hcl` is gitignored; use `backend.hcl.example` as template.
-- **Supply chain:** Images built via Tekton; Trivy and Conftest run in CI; Gatekeeper enforces policy at admission. See [CHAPTER3_REFERENCE.md](CHAPTER3_REFERENCE.md) and Table 3 controls.
+- **Supply chain:** Images built via Tekton; Trivy and Conftest run in CI; Gatekeeper enforces policy at admission.
 - **Access:** EKS access via IAM (EKS Access Entry); Argo CD and Grafana have RBAC. Restrict who can merge to `main` and who has AWS/thesis profile access.
 
 ## Compliance
