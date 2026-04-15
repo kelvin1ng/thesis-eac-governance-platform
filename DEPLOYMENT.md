@@ -1,6 +1,6 @@
 # Deployment Instructions
 
-**Reference:** CHAPTER3_REFERENCE.md; PROJECT_PLAN.md Steps 1–10.
+**Reference:** PROJECT_PLAN.md Steps 1–10.
 
 Deployment order and prerequisites for local (Kind) and AWS EKS.
 
