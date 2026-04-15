@@ -2,7 +2,7 @@
 
 Unified Everything-as-Code (EaC) governance platform — MASc thesis implementation (Chapter 3). Production-style layout for infrastructure, policy, GitOps, and observability.
 
-**References:** [CHAPTER3_REFERENCE.md](CHAPTER3_REFERENCE.md) (mandatory), [PROJECT_PLAN.md](PROJECT_PLAN.md).
+**References:** [PROJECT_PLAN.md](PROJECT_PLAN.md).
 
 ---
 
@@ -118,8 +118,7 @@ Single command: `make deploy`. Per-phase: `make prep`, `make infra`, … (see `m
 │   └── security/         # Security-focused tests
 ├── Makefile               # prep, deploy, verify, smoke, preflight, collect-evidence, ci-local
 ├── CONTRIBUTING.md
-├── SECURITY.md
-└── CHAPTER3_REFERENCE.md
+└── SECURITY.md
 ```
 
 ---
