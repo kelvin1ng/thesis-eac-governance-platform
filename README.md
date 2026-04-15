@@ -142,4 +142,4 @@ This repo implements the platform described in Chapter 3 of the thesis: four lay
 | `make destroy`    | Destroy cluster (see runbook)   |
 | `make help`       | List all targets               |
 
-*Shell scripts use LF line endings. On Windows, run from WSL or Git Bash.*
+*Shell scripts use LF line endings. On Windows, run from WSL or Git Bash.
