@@ -2,7 +2,7 @@
 
 ## Scope
 
-This repository is the implementation for the MASc thesis *Unified Everything-as-Code Governance Platform* (Chapter 3). Contributions should align with the architecture in [CHAPTER3_REFERENCE.md](CHAPTER3_REFERENCE.md) and the plan in [PROJECT_PLAN.md](PROJECT_PLAN.md).
+This repository is the implementation for the MASc thesis *Unified Everything-as-Code Governance Platform* (Chapter 3). Contributions should align with the plan in [PROJECT_PLAN.md](PROJECT_PLAN.md).
 
 ## Workflow
 
