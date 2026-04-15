@@ -2,7 +2,7 @@
 
 **Purpose:** After `terraform destroy`, restore the entire thesis-eac-governance-platform environment on EKS (worker nodes t3.medium). All commands are to be run from **WSL (Ubuntu on Windows)**.
 
-**Reference:** CHAPTER3_REFERENCE.md, PROJECT_PLAN.md, DEPLOYMENT.md, infra/README.md, monitoring/README.md, docs/CONSISTENCY-AUDIT.md.
+**Reference:** PROJECT_PLAN.md, DEPLOYMENT.md, infra/README.md, monitoring/README.md, docs/CONSISTENCY-AUDIT.md.
 
 ---
 
